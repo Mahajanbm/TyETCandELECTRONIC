@@ -1,0 +1,734 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+mysql> create database ty;
+ERROR 1007 (HY000): Can't create database 'ty'; database exists
+mysql> use tydemo;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_tydemo |
++------------------+
+| tblemployee      |
++------------------+
+1 row in set (0.05 sec)
+
+mysql> create  table tblStudent(rollno int,name varchar(50),city varchar(50),dept varchar(50),mobile varchar(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc tblstudent;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(50) | YES  |     | NULL    |       |
+| city   | varchar(50) | YES  |     | NULL    |       |
+| dept   | varchar(50) | YES  |     | NULL    |       |
+| mobile | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into tblStudent values(101,'ajay','pune','CSE','9922336655');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into tblstudent(rollno,name,city,dept,mobile) values(102,'nani','hyd','CSE','551122545');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblstudent (rollno,name,city) values(103,'joe','hyd');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblstudent (name,city,rollno,mobile,dept) values('bob','delhi',104,'6546546','HR');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblstudent (rollno,name,city,dept,mobile) values(105,'raj','mumbai','Sales','545465'),(106,'tim','hyd','Hr','794646');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+------------+
+| rollno | name | city   | dept  | mobile     |
++--------+------+--------+-------+------------+
+|    101 | ajay | pune   | CSE   | 9922336655 |
+|    102 | nani | hyd    | CSE   | 551122545  |
+|    103 | joe  | hyd    | NULL  | NULL       |
+|    104 | bob  | delhi  | HR    | 6546546    |
+|    105 | raj  | mumbai | Sales | 545465     |
+|    106 | tim  | hyd    | Hr    | 794646     |
++--------+------+--------+-------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select rollno,name,city,dept,mobile from tblstudent;
++--------+------+--------+-------+------------+
+| rollno | name | city   | dept  | mobile     |
++--------+------+--------+-------+------------+
+|    101 | ajay | pune   | CSE   | 9922336655 |
+|    102 | nani | hyd    | CSE   | 551122545  |
+|    103 | joe  | hyd    | NULL  | NULL       |
+|    104 | bob  | delhi  | HR    | 6546546    |
+|    105 | raj  | mumbai | Sales | 545465     |
+|    106 | tim  | hyd    | Hr    | 794646     |
++--------+------+--------+-------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select rollno,name from tblstudent;
++--------+------+
+| rollno | name |
++--------+------+
+|    101 | ajay |
+|    102 | nani |
+|    103 | joe  |
+|    104 | bob  |
+|    105 | raj  |
+|    106 | tim  |
++--------+------+
+6 rows in set (0.00 sec)
+
+mysql> Slect rollno,name from tblstudent;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Slect rollno,name from tblstudent' at line 1
+mysql> Select rollno,name from tblstudent;
++--------+------+
+| rollno | name |
++--------+------+
+|    101 | ajay |
+|    102 | nani |
+|    103 | joe  |
+|    104 | bob  |
+|    105 | raj  |
+|    106 | tim  |
++--------+------+
+6 rows in set (0.00 sec)
+
+mysql> select rollno as StudentRollNo,name StudentName,city StudentCity from tblstudent;
++---------------+-------------+-------------+
+| StudentRollNo | StudentName | StudentCity |
++---------------+-------------+-------------+
+|           101 | ajay        | pune        |
+|           102 | nani        | hyd         |
+|           103 | joe         | hyd         |
+|           104 | bob         | delhi       |
+|           105 | raj         | mumbai      |
+|           106 | tim         | hyd         |
++---------------+-------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select rollno as StudentRollNo,name StudentName,city StudentCity from tblstudent where rollno =103;
++---------------+-------------+-------------+
+| StudentRollNo | StudentName | StudentCity |
++---------------+-------------+-------------+
+|           103 | joe         | hyd         |
++---------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select rollno as StudentRollNo,name StudentName,city StudentCity from tblstudent where rollno ='tim';
+Empty set, 1 warning (0.00 sec)
+
+mysql> select rollno as StudentRollNo,name StudentName,city StudentCity from tblstudent where name ='tim';
++---------------+-------------+-------------+
+| StudentRollNo | StudentName | StudentCity |
++---------------+-------------+-------------+
+|           106 | tim         | hyd         |
++---------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> insert into tblstudent (rollno,name,city,dept,mobile) values(null,'raj','mumbai','Sales','545465'),(null,'tim','hyd','Hr','794646');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+------------+
+| rollno | name | city   | dept  | mobile     |
++--------+------+--------+-------+------------+
+|    101 | ajay | pune   | CSE   | 9922336655 |
+|    102 | nani | hyd    | CSE   | 551122545  |
+|    103 | joe  | hyd    | NULL  | NULL       |
+|    104 | bob  | delhi  | HR    | 6546546    |
+|    105 | raj  | mumbai | Sales | 545465     |
+|    106 | tim  | hyd    | Hr    | 794646     |
+|   NULL | raj  | mumbai | Sales | 545465     |
+|   NULL | tim  | hyd    | Hr    | 794646     |
++--------+------+--------+-------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select rollno as StudentRollNo,name StudentName,city StudentCity from tblstudent where rollno =null;
+Empty set (0.00 sec)
+
+mysql> select rollno as StudentRollNo,name StudentName,city StudentCity from tblstudent where rollno  is null;
++---------------+-------------+-------------+
+| StudentRollNo | StudentName | StudentCity |
++---------------+-------------+-------------+
+|          NULL | raj         | mumbai      |
+|          NULL | tim         | hyd         |
++---------------+-------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from tblstudent where rollno=101;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select rollno as StudentRollNo,name StudentName,city StudentCity from tblstudent where rollno  is null;
++---------------+-------------+-------------+
+| StudentRollNo | StudentName | StudentCity |
++---------------+-------------+-------------+
+|          NULL | raj         | mumbai      |
+|          NULL | tim         | hyd         |
++---------------+-------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | NULL  | NULL      |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | raj  | mumbai | Sales | 545465    |
+|   NULL | tim  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> delete from tblstudent  where  rollno is null;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | NULL  | NULL      |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> update  tblstudent  set dept='HR', mobile='65464646' where rollno=103;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  where name like'n%';
++--------+------+------+------+-----------+
+| rollno | name | city | dept | mobile    |
++--------+------+------+------+-----------+
+|    102 | nani | hyd  | CSE  | 551122545 |
++--------+------+------+------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblstudent  where name like'%i';
++--------+------+------+------+-----------+
+| rollno | name | city | dept | mobile    |
++--------+------+------+------+-----------+
+|    102 | nani | hyd  | CSE  | 551122545 |
++--------+------+------+------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into tblstudent (rollno,name,city,dept,mobile) values(null,'mi','mumbai','Sales','545465'),(null,'tii','hyd','Hr','794646');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  where name like'n%';
++--------+------+------+------+-----------+
+| rollno | name | city | dept | mobile    |
++--------+------+------+------+-----------+
+|    102 | nani | hyd  | CSE  | 551122545 |
++--------+------+------+------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblstudent  where name like'%i';
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  where name like'%m%';
++--------+------+--------+-------+--------+
+| rollno | name | city   | dept  | mobile |
++--------+------+--------+-------+--------+
+|    106 | tim  | hyd    | Hr    | 794646 |
+|   NULL | mi   | mumbai | Sales | 545465 |
++--------+------+--------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> insert into tblstudent (rollno,name,city,dept,mobile) values(null,'mob','mumbai','Sales','545465'),(null,'mmo','hyd','Hr','794646');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  where name like'%o%';
++--------+------+--------+-------+----------+
+| rollno | name | city   | dept  | mobile   |
++--------+------+--------+-------+----------+
+|    103 | joe  | hyd    | HR    | 65464646 |
+|    104 | bob  | delhi  | HR    | 6546546  |
+|   NULL | mob  | mumbai | Sales | 545465   |
+|   NULL | mmo  | hyd    | Hr    | 794646   |
++--------+------+--------+-------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  where name like'_o%';
++--------+------+--------+-------+----------+
+| rollno | name | city   | dept  | mobile   |
++--------+------+--------+-------+----------+
+|    103 | joe  | hyd    | HR    | 65464646 |
+|    104 | bob  | delhi  | HR    | 6546546  |
+|   NULL | mob  | mumbai | Sales | 545465   |
++--------+------+--------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where city like'%a_'
+    -> ;
++--------+------+--------+-------+--------+
+| rollno | name | city   | dept  | mobile |
++--------+------+--------+-------+--------+
+|    105 | raj  | mumbai | Sales | 545465 |
+|   NULL | mi   | mumbai | Sales | 545465 |
+|   NULL | mob  | mumbai | Sales | 545465 |
++--------+------+--------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where name='tim' and dept='hr';
++--------+------+------+------+--------+
+| rollno | name | city | dept | mobile |
++--------+------+------+------+--------+
+|    106 | tim  | hyd  | Hr   | 794646 |
++--------+------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblstudent where name='tim' and dept='mumbai';
+Empty set (0.00 sec)
+
+mysql> select * from tblstudent where name='tim' or  dept='mumbai';
++--------+------+------+------+--------+
+| rollno | name | city | dept | mobile |
++--------+------+------+------+--------+
+|    106 | tim  | hyd  | Hr   | 794646 |
++--------+------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblstudent where name='tim' or  city='mumbai';
++--------+------+--------+-------+--------+
+| rollno | name | city   | dept  | mobile |
++--------+------+--------+-------+--------+
+|    105 | raj  | mumbai | Sales | 545465 |
+|    106 | tim  | hyd    | Hr    | 794646 |
+|   NULL | mi   | mumbai | Sales | 545465 |
+|   NULL | mob  | mumbai | Sales | 545465 |
++--------+------+--------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where name='tim' and city='mumbai';
+Empty set (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where rollno between 103 and 106;
++--------+------+--------+-------+----------+
+| rollno | name | city   | dept  | mobile   |
++--------+------+--------+-------+----------+
+|    103 | joe  | hyd    | HR    | 65464646 |
+|    104 | bob  | delhi  | HR    | 6546546  |
+|    105 | raj  | mumbai | Sales | 545465   |
+|    106 | tim  | hyd    | Hr    | 794646   |
++--------+------+--------+-------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where rollno in(102,104,105);
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
++--------+------+--------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where rollno  not in(103,104,106);
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    105 | raj  | mumbai | Sales | 545465    |
++--------+------+--------+-------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  ;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  order by desc rollno ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc rollno' at line 1
+mysql> select * from tblstudent  orderby desc rollno ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc rollno' at line 1
+mysql> select * from tblstudent  order by   rollno  desc;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    106 | tim  | hyd    | Hr    | 794646    |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    102 | nani | hyd    | CSE   | 551122545 |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from tblstudent  order by   name  desc;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    102 | nani | hyd    | CSE   | 551122545 |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select count(name) as total from tblstudent
+    -> ;
++-------+
+| total |
++-------+
+|     9 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblemployee;
++------+-------+-------+---------+
+| eId  | eName | eDept | eSalary |
++------+-------+-------+---------+
+|  101 | Ajay  | Hr    |   54515 |
+|  102 | nani  | CSE   |  154515 |
++------+-------+-------+---------+
+2 rows in set (0.01 sec)
+
+mysql> select max(mobile) from tblstudent;
++-------------+
+| max(mobile) |
++-------------+
+| 794646      |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(rollno) from tblstudent;
++-------------+
+| max(rollno) |
++-------------+
+|         106 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(rollno) from tblstudent;
++-------------+
+| min(rollno) |
++-------------+
+|         102 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(rollno) from tblstudent;
++-------------+
+| avg(rollno) |
++-------------+
+|    104.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(rollno) from tblstudent;
++-------------+
+| sum(rollno) |
++-------------+
+|         520 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblsudent;
+ERROR 1146 (42S02): Table 'tydemo.tblsudent' doesn't exist
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select city as city ,count(city) total from tblstudent groupby city;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'city' at line 1
+mysql> select city as city ,count(city) total from tblstudent group by city;
++--------+-------+
+| city   | total |
++--------+-------+
+| hyd    |     5 |
+| delhi  |     1 |
+| mumbai |     3 |
++--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from  tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where rollno>102;
++--------+------+--------+-------+----------+
+| rollno | name | city   | dept  | mobile   |
++--------+------+--------+-------+----------+
+|    103 | joe  | hyd    | HR    | 65464646 |
+|    104 | bob  | delhi  | HR    | 6546546  |
+|    105 | raj  | mumbai | Sales | 545465   |
+|    106 | tim  | hyd    | Hr    | 794646   |
++--------+------+--------+-------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where rollno>102 and rollno<105;
++--------+------+-------+------+----------+
+| rollno | name | city  | dept | mobile   |
++--------+------+-------+------+----------+
+|    103 | joe  | hyd   | HR   | 65464646 |
+|    104 | bob  | delhi | HR   | 6546546  |
++--------+------+-------+------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tblstudent where rollno>=102 and rollno<105;
++--------+------+-------+------+-----------+
+| rollno | name | city  | dept | mobile    |
++--------+------+-------+------+-----------+
+|    102 | nani | hyd   | CSE  | 551122545 |
+|    103 | joe  | hyd   | HR   | 65464646  |
+|    104 | bob  | delhi | HR   | 6546546   |
++--------+------+-------+------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select city as city ,count(city) total from tblstudent group by city;
++--------+-------+
+| city   | total |
++--------+-------+
+| hyd    |     5 |
+| delhi  |     1 |
+| mumbai |     3 |
++--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select city as city ,count(city) total >1 from tblstudent group by city;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>1 from tblstudent group by city' at line 1
+mysql> select city as city ,count(city) total from tblstudent where count(city)>1;
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select city as city ,count(city) total >1 from tblstudent group by city having count(city)>1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>1 from tblstudent group by city having count(city)>1' at line 1
+mysql> select city as city ,count(city) total  from tblstudent group by city having count(city)>1;
++--------+-------+
+| city   | total |
++--------+-------+
+| hyd    |     5 |
+| mumbai |     3 |
++--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table tblemp(id int unique ,name varchar(50),city varchar(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into tblemp values(101,"mahi","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblemp values(101,"nani","hyd");
+ERROR 1062 (23000): Duplicate entry '101' for key 'tblemp.id'
+mysql> insert into tblemp values(null,"nani","hyd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblemp values(null,"nani","hyd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblemp values(null,"nani","hyd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from  tblemp;
++------+------+------+
+| id   | name | city |
++------+------+------+
+|  101 | mahi | pune |
+| NULL | nani | hyd  |
+| NULL | nani | hyd  |
+| NULL | nani | hyd  |
++------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into tblemp (id,name)values(101,"nani");
+ERROR 1062 (23000): Duplicate entry '101' for key 'tblemp.id'
+mysql> insert into tblemp (id,name)values(102,"nani");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tblemp;
++------+------+------+
+| id   | name | city |
++------+------+------+
+|  101 | mahi | pune |
+| NULL | nani | hyd  |
+| NULL | nani | hyd  |
+| NULL | nani | hyd  |
+|  102 | nani | NULL |
++------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> drop table tblemp;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table tblemp(id int unique ,name varchar(50),city varchar(50) not null);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into tblemp (id,name)values(102,"nani");
+ERROR 1364 (HY000): Field 'city' doesn't have a default value
+mysql>
