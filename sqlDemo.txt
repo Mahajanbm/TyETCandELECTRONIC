@@ -1,0 +1,521 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database Mech;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| akash1             |
+| bb                 |
+| bb1                |
+| dd                 |
+| de                 |
+| demo               |
+| demo1              |
+| demo2              |
+| demo5              |
+| demoooo            |
+| employee           |
+| fuel               |
+| fueldemo           |
+| impact18           |
+| impact181          |
+| impcat             |
+| information_schema |
+| javademo           |
+| joins              |
+| jspm               |
+| jspmbarshi         |
+| jspmdemo           |
+| mech               |
+| mm                 |
+| mysql              |
+| nani               |
+| performance_schema |
+| productsdb         |
+| project            |
+| projectdemo        |
+| sakila             |
+| servlet            |
+| skn                |
+| skn1               |
+| skn2               |
+| springdemo         |
+| stud               |
+| student            |
+| super30            |
+| sys                |
+| ty                 |
+| ty3to6             |
+| tycomp             |
+| tydemo             |
+| world              |
++--------------------+
+45 rows in set (0.02 sec)
+
+mysql> use mech;
+Database changed
+mysql> create table tblStudent (rollno int ,name varchar(50),city varchar(50),mailid varchar(100));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_mech |
++----------------+
+| tblstudent     |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> desc tblstudent;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| rollno | int          | YES  |     | NULL    |       |
+| name   | varchar(50)  | YES  |     | NULL    |       |
+| city   | varchar(50)  | YES  |     | NULL    |       |
+| mailid | varchar(100) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into tblstudent values(1,'joe','hyd','joe@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from tblstudent;
++--------+------+------+---------------+
+| rollno | name | city | mailid        |
++--------+------+------+---------------+
+|      1 | joe  | hyd  | joe@gmail.com |
++--------+------+------+---------------+
+1 row in set (0.00 sec)
+
+mysql> insert into tblstudent (rollno,name,city,mailid) values(2,'bob','pune','bob@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblstudent (name,rollno,mailid,city) values('tim',3,'tim@gmail.com','delhi');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+-------+---------------+
+| rollno | name | city  | mailid        |
++--------+------+-------+---------------+
+|      1 | joe  | hyd   | joe@gmail.com |
+|      2 | bob  | pune  | bob@gmail.com |
+|      3 | tim  | delhi | tim@gmail.com |
++--------+------+-------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into tblstudent(rollno,name) values(4,'mahi');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblstudent (rollno,name,city,mailid) values(5,'vaibhav','jalgaon','vaibhav@gmail.com'),(6,'Shashank','Latur','shashank@gmail.com');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+----------+---------+--------------------+
+| rollno | name     | city    | mailid             |
++--------+----------+---------+--------------------+
+|      1 | joe      | hyd     | joe@gmail.com      |
+|      2 | bob      | pune    | bob@gmail.com      |
+|      3 | tim      | delhi   | tim@gmail.com      |
+|      4 | mahi     | NULL    | NULL               |
+|      5 | vaibhav  | jalgaon | vaibhav@gmail.com  |
+|      6 | Shashank | Latur   | shashank@gmail.com |
++--------+----------+---------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> select rollno,name,city,mailid from tblstudent;
++--------+----------+---------+--------------------+
+| rollno | name     | city    | mailid             |
++--------+----------+---------+--------------------+
+|      1 | joe      | hyd     | joe@gmail.com      |
+|      2 | bob      | pune    | bob@gmail.com      |
+|      3 | tim      | delhi   | tim@gmail.com      |
+|      4 | mahi     | NULL    | NULL               |
+|      5 | vaibhav  | jalgaon | vaibhav@gmail.com  |
+|      6 | Shashank | Latur   | shashank@gmail.com |
++--------+----------+---------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> select name,city from tblStudent;
++----------+---------+
+| name     | city    |
++----------+---------+
+| joe      | hyd     |
+| bob      | pune    |
+| tim      | delhi   |
+| mahi     | NULL    |
+| vaibhav  | jalgaon |
+| Shashank | Latur   |
++----------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblemployee;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
++----+---------+--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select id, name,city,dept, salary from tblemployee where name='tim';
++----+------+--------+--------+--------+
+| id | name | city   | dept   | salary |
++----+------+--------+--------+--------+
+|  5 | tim  | jaipur | tester |  23233 |
++----+------+--------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> select id, name,city,dept, salary from tblemployee where id=5;
++----+------+--------+--------+--------+
+| id | name | city   | dept   | salary |
++----+------+--------+--------+--------+
+|  5 | tim  | jaipur | tester |  23233 |
++----+------+--------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> select id, name,c^Cloyee where id=5;
+mysql> select rollno ,name,city,mailid from tblStudent where city =null;
+Empty set (0.00 sec)
+
+mysql> select * from tblStudent;
++--------+----------+---------+--------------------+
+| rollno | name     | city    | mailid             |
++--------+----------+---------+--------------------+
+|      1 | joe      | hyd     | joe@gmail.com      |
+|      2 | bob      | pune    | bob@gmail.com      |
+|      3 | tim      | delhi   | tim@gmail.com      |
+|      4 | mahi     | NULL    | NULL               |
+|      5 | vaibhav  | jalgaon | vaibhav@gmail.com  |
+|      6 | Shashank | Latur   | shashank@gmail.com |
++--------+----------+---------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> select rollno ,name,city,mailid from tblStudent where city  is  null;
++--------+------+------+--------+
+| rollno | name | city | mailid |
++--------+------+------+--------+
+|      4 | mahi | NULL | NULL   |
++--------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> delete from tblStudent where name='tim';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tblStudent;
++--------+----------+---------+--------------------+
+| rollno | name     | city    | mailid             |
++--------+----------+---------+--------------------+
+|      1 | joe      | hyd     | joe@gmail.com      |
+|      2 | bob      | pune    | bob@gmail.com      |
+|      4 | mahi     | NULL    | NULL               |
+|      5 | vaibhav  | jalgaon | vaibhav@gmail.com  |
+|      6 | Shashank | Latur   | shashank@gmail.com |
++--------+----------+---------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from tblStudent where city  is null;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tblStudent;
++--------+----------+---------+--------------------+
+| rollno | name     | city    | mailid             |
++--------+----------+---------+--------------------+
+|      1 | joe      | hyd     | joe@gmail.com      |
+|      2 | bob      | pune    | bob@gmail.com      |
+|      5 | vaibhav  | jalgaon | vaibhav@gmail.com  |
+|      6 | Shashank | Latur   | shashank@gmail.com |
++--------+----------+---------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql> update tblStudent set city='mumbai' where name='bob';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from tblStudent;
++--------+----------+---------+--------------------+
+| rollno | name     | city    | mailid             |
++--------+----------+---------+--------------------+
+|      1 | joe      | hyd     | joe@gmail.com      |
+|      2 | bob      | mumbai  | bob@gmail.com      |
+|      5 | vaibhav  | jalgaon | vaibhav@gmail.com  |
+|      6 | Shashank | Latur   | shashank@gmail.com |
++--------+----------+---------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql> update tblStudent set city="pune" ,mailid='vaibhav@mitaoe.ac.in' where name='vaibhav';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from tblStudent;
++--------+----------+--------+----------------------+
+| rollno | name     | city   | mailid               |
++--------+----------+--------+----------------------+
+|      1 | joe      | hyd    | joe@gmail.com        |
+|      2 | bob      | mumbai | bob@gmail.com        |
+|      5 | vaibhav  | pune   | vaibhav@mitaoe.ac.in |
+|      6 | Shashank | Latur  | shashank@gmail.com   |
++--------+----------+--------+----------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblEmployee;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
++----+---------+--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tblEmployee where name like'm%';
++----+---------+------+------+--------+
+| id | name    | city | dept | salary |
++----+---------+------+------+--------+
+|  1 | mahajan | hyd  | hr   |  12345 |
+|  3 | mahi    | hyd  | dev  |  68765 |
++----+---------+------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tblEmployee where dept like'%r';
++----+---------+--------+--------+--------+
+| id | name    | city   | dept   | salary |
++----+---------+--------+--------+--------+
+|  1 | mahajan | hyd    | hr     |  12345 |
+|  5 | tim     | jaipur | tester |  23233 |
++----+---------+--------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from  tblemployee;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
++----+---------+--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tblEmployee where name like'%a%';
++----+---------+------+------+--------+
+| id | name    | city | dept | salary |
++----+---------+------+------+--------+
+|  1 | mahajan | hyd  | hr   |  12345 |
+|  2 | ajay    | pune | dev  | 545465 |
+|  3 | mahi    | hyd  | dev  |  68765 |
++----+---------+------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tblEmployeee;
+ERROR 1146 (42S02): Table 'mech.tblemployeee' doesn't exist
+mysql> select * from tblEmployee;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
++----+---------+--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into tblEmployee values( 6,'mahesh','pune','dve',41);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tblemployee where dept like'%e%'
+    -> ;
++----+--------+--------+-------------+--------+
+| id | name   | city   | dept        | salary |
++----+--------+--------+-------------+--------+
+|  2 | ajay   | pune   | dev         | 545465 |
+|  3 | mahi   | hyd    | dev         |  68765 |
+|  4 | joe    | delhi  | devops engg | 546546 |
+|  5 | tim    | jaipur | tester      |  23233 |
+|  6 | mahesh | pune   | dve         |     41 |
++----+--------+--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tblemployee where dept like'_e%';
++----+------+--------+-------------+--------+
+| id | name | city   | dept        | salary |
++----+------+--------+-------------+--------+
+|  2 | ajay | pune   | dev         | 545465 |
+|  3 | mahi | hyd    | dev         |  68765 |
+|  4 | joe  | delhi  | devops engg | 546546 |
+|  5 | tim  | jaipur | tester      |  23233 |
++----+------+--------+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblemployee;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
+|  6 | mahesh  | pune   | dve         |     41 |
++----+---------+--------+-------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblemployee where id between  2 and 5;
++----+------+--------+-------------+--------+
+| id | name | city   | dept        | salary |
++----+------+--------+-------------+--------+
+|  2 | ajay | pune   | dev         | 545465 |
+|  3 | mahi | hyd    | dev         |  68765 |
+|  4 | joe  | delhi  | devops engg | 546546 |
+|  5 | tim  | jaipur | tester      |  23233 |
++----+------+--------+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblemployee ;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
+|  6 | mahesh  | pune   | dve         |     41 |
++----+---------+--------+-------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblemployee where id in(2,4,6);
++----+--------+-------+-------------+--------+
+| id | name   | city  | dept        | salary |
++----+--------+-------+-------------+--------+
+|  2 | ajay   | pune  | dev         | 545465 |
+|  4 | joe    | delhi | devops engg | 546546 |
+|  6 | mahesh | pune  | dve         |     41 |
++----+--------+-------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tblemployee where id not in(2,4,6);
++----+---------+--------+--------+--------+
+| id | name    | city   | dept   | salary |
++----+---------+--------+--------+--------+
+|  1 | mahajan | hyd    | hr     |  12345 |
+|  3 | mahi    | hyd    | dev    |  68765 |
+|  5 | tim     | jaipur | tester |  23233 |
++----+---------+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tblemployee ;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
+|  6 | mahesh  | pune   | dve         |     41 |
++----+---------+--------+-------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblemployee  where id=2 and city='pune';
++----+------+------+------+--------+
+| id | name | city | dept | salary |
++----+------+------+------+--------+
+|  2 | ajay | pune | dev  | 545465 |
++----+------+------+------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblemployee  where id=2 and city='delhi';
+Empty set (0.00 sec)
+
+mysql> select * from tblemployee  where id=2  or city='delhi';
++----+------+-------+-------------+--------+
+| id | name | city  | dept        | salary |
++----+------+-------+-------------+--------+
+|  2 | ajay | pune  | dev         | 545465 |
+|  4 | joe  | delhi | devops engg | 546546 |
++----+------+-------+-------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tblemployee  where id=9  or city='delhi';
++----+------+-------+-------------+--------+
+| id | name | city  | dept        | salary |
++----+------+-------+-------------+--------+
+|  4 | joe  | delhi | devops engg | 546546 |
++----+------+-------+-------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblemployee;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  5 | tim     | jaipur | tester      |  23233 |
+|  6 | mahesh  | pune   | dve         |     41 |
++----+---------+--------+-------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblemployee order by id desc;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  6 | mahesh  | pune   | dve         |     41 |
+|  5 | tim     | jaipur | tester      |  23233 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  2 | ajay    | pune   | dev         | 545465 |
+|  1 | mahajan | hyd    | hr          |  12345 |
++----+---------+--------+-------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblemployee order by name desc;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  5 | tim     | jaipur | tester      |  23233 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  6 | mahesh  | pune   | dve         |     41 |
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  2 | ajay    | pune   | dev         | 545465 |
++----+---------+--------+-------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblemployee order by name ;
++----+---------+--------+-------------+--------+
+| id | name    | city   | dept        | salary |
++----+---------+--------+-------------+--------+
+|  2 | ajay    | pune   | dev         | 545465 |
+|  4 | joe     | delhi  | devops engg | 546546 |
+|  1 | mahajan | hyd    | hr          |  12345 |
+|  6 | mahesh  | pune   | dve         |     41 |
+|  3 | mahi    | hyd    | dev         |  68765 |
+|  5 | tim     | jaipur | tester      |  23233 |
++----+---------+--------+-------------+--------+
+6 rows in set (0.00 sec)
+
+mysql>

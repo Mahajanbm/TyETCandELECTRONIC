@@ -1,0 +1,589 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use tydemo;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_tydemo |
++------------------+
+| tblemp           |
+| tblemployee      |
+| tblstudent       |
++------------------+
+3 rows in set (0.05 sec)
+
+mysql> select * from tblemployee;
++------+-------+-------+---------+
+| eId  | eName | eDept | eSalary |
++------+-------+-------+---------+
+|  101 | Ajay  | Hr    |   54515 |
+|  102 | nani  | CSE   |  154515 |
++------+-------+-------+---------+
+2 rows in set (0.02 sec)
+
+mysql> desc tblemployee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eId     | int         | YES  |     | NULL    |       |
+| eName   | varchar(50) | YES  |     | NULL    |       |
+| eDept   | varchar(50) | YES  |     | NULL    |       |
+| eSalary | float       | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> desc tblstudent
+    -> ;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(50) | YES  |     | NULL    |       |
+| city   | varchar(50) | YES  |     | NULL    |       |
+| dept   | varchar(50) | YES  |     | NULL    |       |
+| mobile | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into tblemployee values(101,"sarthak","HR",85485);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from tblemployee;
++------+---------+-------+---------+
+| eId  | eName   | eDept | eSalary |
++------+---------+-------+---------+
+|  101 | Ajay    | Hr    |   54515 |
+|  102 | nani    | CSE   |  154515 |
+|  101 | sarthak | HR    |   85485 |
++------+---------+-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into tblemployee values(101,"sarthak","HR",85485);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tblemployee values(101,"sarthak","HR",85485);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> ;
+ERROR:
+No query specified
+
+mysql> desc tblstudent
+    -> ;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(50) | YES  |     | NULL    |       |
+| city   | varchar(50) | YES  |     | NULL    |       |
+| dept   | varchar(50) | YES  |     | NULL    |       |
+| mobile | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tblemployee;
++------+---------+-------+---------+
+| eId  | eName   | eDept | eSalary |
++------+---------+-------+---------+
+|  101 | Ajay    | Hr    |   54515 |
+|  102 | nani    | CSE   |  154515 |
+|  101 | sarthak | HR    |   85485 |
+|  101 | sarthak | HR    |   85485 |
+|  101 | sarthak | HR    |   85485 |
++------+---------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> create table demo(id  int unique, name varchar(50),city varchar(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc demo;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  | UNI | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| city  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into demo valueas(101,"nani","pune");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'valueas(101,"nani","pune")' at line 1
+mysql> insert into demo values(101,"nani","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into demo values(101,"nani","pune");
+ERROR 1062 (23000): Duplicate entry '101' for key 'demo.id'
+mysql> insert into demo values(101,"nani","pune");
+ERROR 1062 (23000): Duplicate entry '101' for key 'demo.id'
+mysql> insert into demo values(10,"nani","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into demo values(10,"nani","pune");
+ERROR 1062 (23000): Duplicate entry '10' for key 'demo.id'
+mysql> insert into demo values(102,"nani","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from demo;
++------+------+------+
+| id   | name | city |
++------+------+------+
+|  101 | nani | pune |
+|   10 | nani | pune |
+|  102 | nani | pune |
++------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> insert into demo values(null,"nani","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into demo values(null,"nani","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into demo values(null,"nani","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from demo;
++------+------+------+
+| id   | name | city |
++------+------+------+
+|  101 | nani | pune |
+|   10 | nani | pune |
+|  102 | nani | pune |
+| NULL | nani | pune |
+| NULL | nani | pune |
+| NULL | nani | pune |
++------+------+------+
+6 rows in set (0.00 sec)
+
+mysql> create table demo1( id int unique, name varchar(50) not null,salary float);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc demo1;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | YES  | UNI | NULL    |       |
+| name   | varchar(50) | NO   |     | NULL    |       |
+| salary | float       | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into demo1 values(1,"mahi",65465);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into demo1 values(2,null,65465);
+ERROR 1048 (23000): Column 'name' cannot be null
+mysql> create table demo1( id int unique, name varchar(50) not null,salary float not null);
+ERROR 1050 (42S01): Table 'demo1' already exists
+mysql> create table demo2( id int unique, name varchar(50) not null,salary float not null);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table demo4( id int unique, name varchar(50) unique,salary float not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table demo5(id  int unique not null,name varchar(50) not null, salary float );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc demo5;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(50) | NO   |     | NULL    |       |
+| salary | float       | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into demo5 values(1,"nani",6546);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into demo5 values(1,"nani",6546);
+ERROR 1062 (23000): Duplicate entry '1' for key 'demo5.id'
+mysql> insert into demo5 values(nuul,"nani",6546);
+ERROR 1054 (42S22): Unknown column 'nuul' in 'field list'
+mysql> insert into demo5 values(null,"nani",6546);
+ERROR 1048 (23000): Column 'id' cannot be null
+mysql> create table tbldemo ( id int primary key ,name varchar(50),city varchar(50));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into tbldemo values(null,"nani",6546);
+ERROR 1048 (23000): Column 'id' cannot be null
+mysql> insert into tbldemo values(null,"nani","pune");
+ERROR 1048 (23000): Column 'id' cannot be null
+mysql> insert into tbldemo values(1,"nani","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo values(1,"nani","pune");
+ERROR 1062 (23000): Duplicate entry '1' for key 'tbldemo.PRIMARY'
+mysql> desc tbldemo;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| city  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into tbldemo  ( id , name) values(2,"Pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select 8 from tbldemo;
++---+
+| 8 |
++---+
+| 8 |
+| 8 |
++---+
+2 rows in set (0.00 sec)
+
+mysql> select * from tbldemo;
++----+------+------+
+| id | name | city |
++----+------+------+
+|  1 | nani | pune |
+|  2 | Pune | NULL |
++----+------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tbldemo( id int, name varchar(50),city varchar(50) default 'mumbai');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '( id int, name varchar(50),city varchar(50) default 'mumbai')' at line 1
+mysql> create table tbldemo1( id int, name varchar(50),city varchar(50) default 'mumbai');
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc tbldemo1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| city  | varchar(50) | YES  |     | mumbai  |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into tbldemo1  ( id , name) values(2,"mahi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo1  ( id , name) values(1,"nani");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tbldemo1;
++------+------+--------+
+| id   | name | city   |
++------+------+--------+
+|    2 | mahi | mumbai |
+|    1 | nani | mumbai |
++------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> desc tblemployee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eId     | int         | YES  |     | NULL    |       |
+| eName   | varchar(50) | YES  |     | NULL    |       |
+| eDept   | varchar(50) | YES  |     | NULL    |       |
+| eSalary | float       | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from tblemployee;
++------+---------+-------+---------+
+| eId  | eName   | eDept | eSalary |
++------+---------+-------+---------+
+|  101 | Ajay    | Hr    |   54515 |
+|  102 | nani    | CSE   |  154515 |
+|  101 | sarthak | HR    |   85485 |
+|  101 | sarthak | HR    |   85485 |
+|  101 | sarthak | HR    |   85485 |
++------+---------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> desc tblstudent;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(50) | YES  |     | NULL    |       |
+| city   | varchar(50) | YES  |     | NULL    |       |
+| dept   | varchar(50) | YES  |     | NULL    |       |
+| mobile | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> slect * from tblstudent;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'slect * from tblstudent' at line 1
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+
+| rollno | name | city   | dept  | mobile    |
++--------+------+--------+-------+-----------+
+|    102 | nani | hyd    | CSE   | 551122545 |
+|    103 | joe  | hyd    | HR    | 65464646  |
+|    104 | bob  | delhi  | HR    | 6546546   |
+|    105 | raj  | mumbai | Sales | 545465    |
+|    106 | tim  | hyd    | Hr    | 794646    |
+|   NULL | mi   | mumbai | Sales | 545465    |
+|   NULL | tii  | hyd    | Hr    | 794646    |
+|   NULL | mob  | mumbai | Sales | 545465    |
+|   NULL | mmo  | hyd    | Hr    | 794646    |
++--------+------+--------+-------+-----------+
+9 rows in set (0.01 sec)
+
+mysql> alter table tblstudent add state varchar(50);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc tblstudent;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(50) | YES  |     | NULL    |       |
+| city   | varchar(50) | YES  |     | NULL    |       |
+| dept   | varchar(50) | YES  |     | NULL    |       |
+| mobile | varchar(50) | YES  |     | NULL    |       |
+| state  | varchar(50) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+-------+
+| rollno | name | city   | dept  | mobile    | state |
++--------+------+--------+-------+-----------+-------+
+|    102 | nani | hyd    | CSE   | 551122545 | NULL  |
+|    103 | joe  | hyd    | HR    | 65464646  | NULL  |
+|    104 | bob  | delhi  | HR    | 6546546   | NULL  |
+|    105 | raj  | mumbai | Sales | 545465    | NULL  |
+|    106 | tim  | hyd    | Hr    | 794646    | NULL  |
+|   NULL | mi   | mumbai | Sales | 545465    | NULL  |
+|   NULL | tii  | hyd    | Hr    | 794646    | NULL  |
+|   NULL | mob  | mumbai | Sales | 545465    | NULL  |
+|   NULL | mmo  | hyd    | Hr    | 794646    | NULL  |
++--------+------+--------+-------+-----------+-------+
+9 rows in set (0.00 sec)
+
+mysql> alter table tblstudent add country varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+-------+---------+
+| rollno | name | city   | dept  | mobile    | state | country |
++--------+------+--------+-------+-----------+-------+---------+
+|    102 | nani | hyd    | CSE   | 551122545 | NULL  | NULL    |
+|    103 | joe  | hyd    | HR    | 65464646  | NULL  | NULL    |
+|    104 | bob  | delhi  | HR    | 6546546   | NULL  | NULL    |
+|    105 | raj  | mumbai | Sales | 545465    | NULL  | NULL    |
+|    106 | tim  | hyd    | Hr    | 794646    | NULL  | NULL    |
+|   NULL | mi   | mumbai | Sales | 545465    | NULL  | NULL    |
+|   NULL | tii  | hyd    | Hr    | 794646    | NULL  | NULL    |
+|   NULL | mob  | mumbai | Sales | 545465    | NULL  | NULL    |
+|   NULL | mmo  | hyd    | Hr    | 794646    | NULL  | NULL    |
++--------+------+--------+-------+-----------+-------+---------+
+9 rows in set (0.00 sec)
+
+mysql> alter table tblstudent  add mailId varchar(100) after mobile;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from tblstudent;
++--------+------+--------+-------+-----------+--------+-------+---------+
+| rollno | name | city   | dept  | mobile    | mailId | state | country |
++--------+------+--------+-------+-----------+--------+-------+---------+
+|    102 | nani | hyd    | CSE   | 551122545 | NULL   | NULL  | NULL    |
+|    103 | joe  | hyd    | HR    | 65464646  | NULL   | NULL  | NULL    |
+|    104 | bob  | delhi  | HR    | 6546546   | NULL   | NULL  | NULL    |
+|    105 | raj  | mumbai | Sales | 545465    | NULL   | NULL  | NULL    |
+|    106 | tim  | hyd    | Hr    | 794646    | NULL   | NULL  | NULL    |
+|   NULL | mi   | mumbai | Sales | 545465    | NULL   | NULL  | NULL    |
+|   NULL | tii  | hyd    | Hr    | 794646    | NULL   | NULL  | NULL    |
+|   NULL | mob  | mumbai | Sales | 545465    | NULL   | NULL  | NULL    |
+|   NULL | mmo  | hyd    | Hr    | 794646    | NULL   | NULL  | NULL    |
++--------+------+--------+-------+-----------+--------+-------+---------+
+9 rows in set (0.00 sec)
+
+mysql> alter  table tblstudent drop mailid;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc tblstudent;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| rollno  | int         | YES  |     | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| city    | varchar(50) | YES  |     | NULL    |       |
+| dept    | varchar(50) | YES  |     | NULL    |       |
+| mobile  | varchar(50) | YES  |     | NULL    |       |
+| state   | varchar(50) | YES  |     | NULL    |       |
+| country | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> alter table tblstudent add mailId varchar(50) first;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc tblstudent;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| mailId  | varchar(50) | YES  |     | NULL    |       |
+| rollno  | int         | YES  |     | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| city    | varchar(50) | YES  |     | NULL    |       |
+| dept    | varchar(50) | YES  |     | NULL    |       |
+| mobile  | varchar(50) | YES  |     | NULL    |       |
+| state   | varchar(50) | YES  |     | NULL    |       |
+| country | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> create table tbldemo5( id int primary key auto_increment ,name varchar(50),city varchar(50));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc tbldemo5;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | YES  |     | NULL    |                |
+| city  | varchar(50) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into tbledemo5 (name,city)values("joe","hyd");
+ERROR 1146 (42S02): Table 'tydemo.tbledemo5' doesn't exist
+mysql> insert into tbedemo5 (name,city)values("joe","hyd");
+ERROR 1146 (42S02): Table 'tydemo.tbedemo5' doesn't exist
+mysql> insert into tbldemo5 (name,city)values("joe","hyd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("bob","hyd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("sam","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("karan","dehi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("jay","thane");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("rohit","jaipur");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select  * from tbldemo5;
++----+-------+--------+
+| id | name  | city   |
++----+-------+--------+
+|  1 | joe   | hyd    |
+|  2 | bob   | hyd    |
+|  3 | sam   | pune   |
+|  4 | karan | dehi   |
+|  5 | jay   | thane  |
+|  6 | rohit | jaipur |
++----+-------+--------+
+6 rows in set (0.00 sec)
+
+mysql> delete from tbldemo5;
+Query OK, 6 rows affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("rohit","jaipur");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("jay","thane");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("karan","dehi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tbldemo5;
++----+-------+--------+
+| id | name  | city   |
++----+-------+--------+
+|  7 | rohit | jaipur |
+|  8 | jay   | thane  |
+|  9 | karan | dehi   |
++----+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> drop table tbldemo5;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table tbldemo5( id int primary key auto_increment ,name varchar(50),city varchar(50));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into tbledemo5 (name,city)values("joe","hyd");
+ERROR 1146 (42S02): Table 'tydemo.tbledemo5' doesn't exist
+mysql> insert into tbedemo5 (name,city)values("joe","hyd");
+ERROR 1146 (42S02): Table 'tydemo.tbedemo5' doesn't exist
+mysql> insert into tbldemo5 (name,city)values("joe","hyd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("bob","hyd");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("sam","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("karan","dehi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("jay","thane");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("rohit","jaipur");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tbldemo5;
++----+-------+--------+
+| id | name  | city   |
++----+-------+--------+
+|  1 | joe   | hyd    |
+|  2 | bob   | hyd    |
+|  3 | sam   | pune   |
+|  4 | karan | dehi   |
+|  5 | jay   | thane  |
+|  6 | rohit | jaipur |
++----+-------+--------+
+6 rows in set (0.00 sec)
+
+mysql> truncate tbldemo5;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from tbldemo5;
+Empty set (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("sam","pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("karan","dehi");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tbldemo5 (name,city)values("jay","thane");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tbldemo5;
++----+-------+-------+
+| id | name  | city  |
++----+-------+-------+
+|  1 | sam   | pune  |
+|  2 | karan | dehi  |
+|  3 | jay   | thane |
++----+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
